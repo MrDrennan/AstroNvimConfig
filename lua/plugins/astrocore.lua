@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+--if true then return {} end -- REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
@@ -32,6 +32,8 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor
+        sidescrolloff = 100, -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -45,6 +47,25 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
+
+        -- possible keys available: backspace, arrow keys, \, ;, ",", tab
+
+        -- Keys not needed:
+        -- M: put cursor on middle line of screen
+        -- L: put cursor on # of lines from the bottom of file
+
+        -- Move fast vertically
+        ["-"] = {"5-zz"},
+        ["<Enter>"] = {"5<Enter>zz"},
+
+        -- Don't reach just to move right 
+        ["n"] = {"l"},
+        ["l"] = {"n"},
+        ["N"] = {"L"},
+        ["L"] = {"N"},
+
+        -- Move to right window with "n" instead of "l"
+        ["<C-n>"] = {"<C-w>l"},
 
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
@@ -66,6 +87,33 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+      },
+
+
+      v = {
+
+      [",."] = {"<ESC>"},
+
+      -- Move right easier
+      ["n"] = {"l"},
+      ["l"] = {"n"},
+      ["N"] = {"L"},
+      ["L"] = {"N"},
+
+      -- Better paste
+      ["p"] = {'"_P'},
+
+      -- Stay in indent mode
+      ["<"] = {"<gv"},
+      [">"] = {">gv"},
+
+      },
+
+
+      i = {
+
+      [",."] = {"<ESC>"},
+
       },
     },
   },
