@@ -92,27 +92,27 @@ return {
 
       v = {
 
-      [",."] = {"<ESC>"},
+        [",."] = {"<ESC>"},
 
-      -- Move right easier
-      ["n"] = {"l"},
-      ["l"] = {"n"},
-      ["N"] = {"L"},
-      ["L"] = {"N"},
+        -- Move right easier
+        ["n"] = {"l"},
+        ["l"] = {"n"},
+        ["N"] = {"L"},
+        ["L"] = {"N"},
 
-      -- Better paste
-      ["p"] = {'"_P'},
+        -- Better paste
+        ["p"] = {'"_P'},
 
-      -- Stay in indent mode
-      ["<"] = {"<gv"},
-      [">"] = {">gv"},
+        -- Stay in indent mode
+        ["<"] = {"<gv"},
+        [">"] = {">gv"},
 
       },
 
 
       i = {
 
-      [",."] = {"<ESC>"},
+        [",."] = {"<ESC>"},
 
       },
     },
