@@ -118,5 +118,21 @@ return {
 
       },
     },
+
+    autocmds = {
+      markdown_format = {
+        {
+          event = "FileType",
+          desc = "Ensure word wrapping and proper indentation for markdown",
+          pattern = "markdown",
+          callback = function()
+            vim.opt_local.wrap = true
+            vim.opt_local.linebreak = true -- don't break words
+            vim.opt_local.breakindent = true -- indent wrapped line back to where top of line started from
+            vim.opt_local.breakindentopt = "shift:2" -- Add 2 spaces
+          end,
+        },
+      },
+    },
   },
 }
