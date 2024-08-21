@@ -67,6 +67,8 @@ return {
         -- Move to right window with "n" instead of "l"
         ["<C-n>"] = {"<C-w>l"},
 
+        ["<Leader>fR"] = {":Telescope lsp_references<CR>", desc = "Find LSP references"},
+
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
