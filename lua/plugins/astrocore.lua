@@ -10,6 +10,7 @@ return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
+
     -- Configure core features of AstroNvim
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
@@ -19,11 +20,13 @@ return {
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
+
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
       virtual_text = true,
       underline = true,
     },
+
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
@@ -34,6 +37,7 @@ return {
         wrap = false, -- sets vim.opt.wrap
         scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor
         sidescrolloff = 100, -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
+        --foldmethod = "indent", -- create folds according to indentation. 'za' to toggle
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -41,6 +45,7 @@ return {
         -- This can be found in the `lua/lazy_setup.lua` file
       },
     },
+
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
@@ -55,23 +60,36 @@ return {
         -- L: put cursor on # of lines from the bottom of file
 
         -- Move fast vertically
-        ["-"] = {"5-zz"},
-        ["<Enter>"] = {"5<Enter>zz"},
+        ["-"] = { "5-zz" },
+        ["<Enter>"] = { "5<Enter>zz" },
 
-        -- Don't reach just to move right 
-        ["n"] = {"l"},
-        ["l"] = {"n"},
-        ["N"] = {"L"},
-        ["L"] = {"N"},
+        -- Don't reach just to move right
+        ["n"] = { "l" },
+        ["l"] = { "n" },
+        ["N"] = { "L" },
+        ["L"] = { "N" },
 
         -- Move to right window with "n" instead of "l"
-        ["<C-n>"] = {"<C-w>l"},
+        ["<C-n>"] = { "<C-w>l" },
 
-        ["<Leader>fR"] = {":Telescope lsp_references<CR>", desc = "Find LSP references"},
+        -- Create cloze deletion for Anki
+        -- "r" for redaction
+        --["<Leader>r"] = { 'ciW{{c1::<C-r>"}}<Esc>T:', desc = "Cloze Deletion" },
+
+        -- Delete cloze deletion
+        --["<Leader>rd"] = { "T:2dF{f}xxb" },
+
+        -- Create cloze deletion for Obsidian-to-Anki
+        ["<Leader>r"] = { 'ciW_1:<C-r>"_<Esc>T_', desc = "Cloze Deletion" },
+
+        -- Delete cloze deletion
+        ["<Leader>rd"] = { "F_xf_x" },
+
+        ["<Leader>fR"] = { ":Telescope lsp_references<CR>", desc = "Find LSP references" },
 
         -- navigate buffer tabs
-        ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-        ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["]0"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["[0"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
@@ -91,31 +109,34 @@ return {
         -- ["<C-S>"] = false,
       },
 
-
       v = {
 
-        [",."] = {"<ESC>"},
+        [",."] = { "<ESC>" },
 
         -- Move right easier
-        ["n"] = {"l"},
-        ["l"] = {"n"},
-        ["N"] = {"L"},
-        ["L"] = {"N"},
+        ["n"] = { "l" },
+        ["l"] = { "n" },
+        ["N"] = { "L" },
+        ["L"] = { "N" },
 
         -- Better paste
-        ["p"] = {'"_P'},
+        ["p"] = { '"_P' },
 
         -- Stay in indent mode
-        ["<"] = {"<gv"},
-        [">"] = {">gv"},
+        ["<"] = { "<gv" },
+        [">"] = { ">gv" },
 
+        -- Create cloze deletion for Anki
+        -- "r" for redaction
+        --["<Leader>r"] = { 'c{{c1::<C-r>"}}<Esc>T:', desc = "Cloze Deletion" },
+
+        -- Create cloze deletion for Obsidian-to-Anki
+        ["<Leader>r"] = { 'c_1:<C-r>"_<Esc>T_', desc = "Cloze Deletion" },
       },
-
 
       i = {
 
-        [",."] = {"<ESC>"},
-
+        [",."] = { "<ESC>" },
       },
     },
 
@@ -129,7 +150,8 @@ return {
             vim.opt_local.wrap = true
             vim.opt_local.linebreak = true -- don't break words
             vim.opt_local.breakindent = true -- indent wrapped line back to where top of line started from
-            vim.opt_local.breakindentopt = "shift:2" -- Add 2 spaces
+            vim.opt_local.breakindentopt = "list:-1" -- Add 2 spaces to indent for list markers
+            vim.opt_local.signcolumn = "no"
           end,
         },
       },
