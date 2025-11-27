@@ -80,6 +80,15 @@ return {
 
         ["@conceal.markdown_inline"] = { fg = xtrafainted },
 
+        -- Checkboxes
+        ["@markup.list.checked"] = { fg = faintedText },
+        -- color of the x in the checkbox. "Type" may be used for other things as the name seems broad
+        Type = { fg = "#00A300" },
+        ["@markup.list.unchecked"] = { fg = faintedText },
+        --TodoCheckmark = { fg = "#077bfb" },
+        TodoCheckmark = { fg = "#277bdb" },
+        --TodoCheckmark = { fg = "#477bbb" },
+
         RenderMarkdownInlineHighlight = { fg = "#ffff66", bg = "" },
 
         -- preformatted text. original was a light red

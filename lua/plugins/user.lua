@@ -67,6 +67,26 @@ return {
         --highlight = "@markup.list.markdown",
       },
 
+      checkbox = {
+
+        bullet = true,
+        right_pad = 0,
+
+        unchecked = {
+          icon = "",
+        },
+
+        checked = {
+          icon = "",
+          scope_highlight = "LineNR",
+        },
+
+        custom = {
+          --todo = { raw = "[-]", rendered = "󰥔", highlight = "Blue", scope_highlight = "Special" },
+          todo = { raw = "[-]", rendered = "", highlight = "LineNR", scope_highlight = "TodoCheckmark" },
+        },
+      },
+
       link = {
         enabled = false,
 
