@@ -12,4 +12,5 @@ return {
   -- import/override with your plugins folder
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
+  { import = "astrocommunity.recipes.neovide" },
 }
